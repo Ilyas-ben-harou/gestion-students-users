@@ -23,6 +23,14 @@
                 <input type="email" class="form-control" name="email" id="email" placeholder="exemple@gmail.com" >
             </div>
             <div class="col-md-12">
+                <label for="password" class="form-label">Password :</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="***********" >
+            </div>
+            <div class="col-md-12">
+                <label for="c_password" class="form-label">Comfired password :</label>
+                <input type="password" class="form-control" name="c_password" id="c_password" placeholder="***********" >
+            </div>
+            <div class="col-md-12">
                 <label for="phone" class="form-label">Phone :</label>
                 <input type="tel" class="form-control" name="phone" id="phone" placeholder="(+212 6 11 11 11 11 )" >
             </div>
@@ -36,7 +44,7 @@
             </div>
             
             <div class="col-12 d-grid">
-                <button class="btn btn-primary" type="submit">Ajouter</button>
+                <button class="btn btn-primary" type="submit" onclick="alert('student est ajouter')">Ajouter</button>
             </div>
         </form>
     </div>

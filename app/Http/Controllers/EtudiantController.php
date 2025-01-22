@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EtudiantController extends Controller
 {
@@ -13,37 +14,49 @@ class EtudiantController extends Controller
         $etudiants=Student::paginate(10);
         return view('etudiants.etudiants',compact('etudiants'));
     }
-    public function detail(Request $request){
-        $etudiant=Student::findOrFail($request->id);
+    public function detail(Student $id){
+
+        // $etudiant=Student::findOrFail($request->id);
+        $etudiant=$id;
         return view('etudiants.detail',compact('etudiant'));
     }
 
     public function create(){
         return view('etudiants.create');
     }
-    public function store(Request $request){
-        $name=$request->name;
-        $email=$request->email;
-        $phone=$request->phone;
-        $address=$request->address;
-        $filiere=$request->filiere;
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'phone'=>'required',
-            'address'=>'required',
-            'filiere'=>'required',
-        ]);
-        Student::create([
-            'name'=>$name,
-            'email'=>$email,
-            'phone'=>$phone,
-            'address'=>$address,
-            'filiere'=>$filiere,
-            'date_inscription' => now()->toDateString()
-        ]);
-        return redirect()->route('etudiants.etudiants');
-    }
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'password' => [
+            'required',
+            'string',
+            'min:8',
+            function($attribute, $value, $fail) use ($request) {
+                if ($value !== $request->c_password) {
+                    $fail('The passwords do not match.');
+                }
+            }
+        ],
+        'c_password' => 'required',
+        'email' => 'required|email|unique:students,email',
+        'phone' => 'required|string',
+        'address' => 'required|string',
+        'filiere' => 'required|string',
+    ]);
+
+    Student::create([
+        'name' => $request->name,
+        'password' => Hash::make($request->password),  // Hash the password
+        'c_password' => Hash::make($request->c_password),  // Hash the password
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'filiere' => $request->filiere,
+    ]);
+
+    return redirect()->route('etudiants.etudiants')->with('succes', 'good');
+}
 
     public function delete($id){
         Student::destroy($id);

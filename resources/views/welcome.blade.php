@@ -72,15 +72,22 @@
     <nav class="navbar">
         <a href="/" class="navbar-brand">MyWebsite</a>
         <div class="navbar-buttons">
-            <a href="{{route('list')}}" class="nav-button">Home</a>
+            <a href="{{route('welcome')}}" class="nav-button">Home</a>
             <a href="{{route('etudiants.etudiants')}}" class="nav-button">list d'etudiants</a>
             <a href="{{route('users.users')}}" class="nav-button">list users</a>
-            <a href="{{route('login')}}" class="nav-button">Login</a>
+            <a href="{{route('etudiant.login')}}" class="nav-button">Login</a>
         </div>
     </nav>
 
     <div class="container">
         <h1>Welcome to Our Website</h1>
+        <div class="row">
+            @if (session()->has('succesLogin'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('succesLogin') }}
+                </div>
+            @endif
+        </div>
         <div class="welcome-message">
             <?php
             $hour = date('H');

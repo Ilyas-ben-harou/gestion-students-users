@@ -22,6 +22,8 @@ class StudentFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'password' => Hash::make('password'),
+            'c_password' => Hash::make('password'),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
             'filiere'=>Str::random(20),

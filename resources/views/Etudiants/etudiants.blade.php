@@ -9,6 +9,13 @@
 </head>
 <body>
     <h1>Etudiants:</h1>
+    <div class="row">
+        @if (session()->has('succes'))
+            <div class="alert alert-success" role="alert">
+                {{ session('succes') }}
+            </div>
+        @endif
+    </div>
     <table class="table w-full text-center">
         <tr>
             <th>ID</th>
