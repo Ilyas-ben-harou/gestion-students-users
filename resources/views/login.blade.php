@@ -53,12 +53,15 @@
                 </div>
             @endif
         </div>
-        <form action="{{ route('etudiant.login') }}" method="POST">
+        <form action="{{ route('login.submit') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" value="{{ old('email')}}">
             </div>
+            @error('email')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">

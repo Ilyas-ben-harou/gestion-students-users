@@ -22,7 +22,7 @@
             <th>Name</th>
             <th>Email</th>
             <th>phone</th>
-            <th>Adress</th>
+            <th>filiere</th>
             <th>Action</th>
         </tr>
         @foreach ($etudiants as $etudiant)
@@ -31,10 +31,11 @@
                 <td>{{$etudiant['name']}}</td>
                 <td>{{$etudiant['email']}}</td>
                 <td>{{$etudiant['phone']}}</td>
-                <td>{{$etudiant['address']}}</td>
-                <td>
-                    <a href={{route('etudiants.detail',$etudiant['id'])}}>detail</a>
-                    <a href="{{ route('etudiants.delete', $etudiant->id) }}" onclick="return confirm('Are you sure?')">Delete</a>
+                <td>{{$etudiant['filiere']}}</td>
+                <td class="row">
+                    <a class="btn btn-success col-auto mx-1" href={{route('etudiants.detail',$etudiant['id'])}}>detail</a>
+                    <a class="btn btn-primary col-auto mx-1" href={{route('etudiants.edit',$etudiant['id'])}}>update</a>
+                    <a class="btn btn-danger col-auto mx-1" href="{{ route('etudiants.delete', $etudiant->id) }}" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
         @endforeach
